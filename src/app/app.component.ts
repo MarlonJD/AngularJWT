@@ -3,6 +3,9 @@ import {BlogPostService} from './blog-post.service';
 import {UserService} from './user.service';
 import {throwError} from 'rxjs';  // Angular 6/RxJS 6
 import { error } from 'util';
+import { JwtHelperService } from "@auth0/angular-jwt";
+
+const helper = new JwtHelperService();
 
 @Component({
   selector: 'app-root',
@@ -31,8 +34,6 @@ export class AppComponent implements OnInit {
   constructor(private _blogPostService: BlogPostService, public _userService: UserService) { }
 
   ngOnInit() {
-    this._userService.rememberMe()
-    this.getPosts();
     this.new_post = {};
     this.user = {
       email: '',
@@ -43,6 +44,12 @@ export class AppComponent implements OnInit {
       email: '',
       password: ''
     }
+    this.rememberMe()
+  }
+
+  rememberMe() {
+    this._userService.rememberMe();
+    this.getPosts();
   }
 
   registerUser() {
@@ -53,6 +60,7 @@ export class AppComponent implements OnInit {
     this._userService.login({'email': this.user.email, 'password': this.user.password});
     console.log("LoggedIn:", this._userService.isLoggedIn());
     console.log("LoggedOut:", this._userService.isLoggedOut());
+    this.getPosts();
   }
 
   refreshToken() {
@@ -85,7 +93,7 @@ export class AppComponent implements OnInit {
   }
 
   createPost() {
-    this._blogPostService.create(this.new_post, this.user.access).subscribe(
+    this._blogPostService.create(this.new_post).subscribe(
        data => {
          // refresh the list
          this.getPosts();

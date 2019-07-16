@@ -1,4 +1,4 @@
-<h2>Register</h2>
+<h2>Register Yo!</h2>
 <div class="row" *ngIf="!_userService.access">
   <div class="col-sm-3">
     <label>Name:</label><br />
@@ -42,7 +42,7 @@
   </div>
 </div>
 <div class="row" *ngIf="_userService.access">
-  <div class="col-sm-12">You are logged in as {{ _userService.email }}.<br />
+  <div class="col-sm-12">You are logged in as {{ _userService.name }}.<br />
     Token Expires: {{ _userService.token_expires }}<br />
     <button (click)="refreshToken()" class="btn btn-primary">Refresh Token</button>&nbsp;
     <button (click)="logout()" class="btn btn-primary">Log Out</button>&nbsp;

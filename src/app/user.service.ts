@@ -24,6 +24,9 @@ export class UserService {
   // the user ID of the logged in user
   public user_id: string;
 
+  // the user's full name of the logged in user
+  public name: string;
+
   // error messages received from the login attempt
   public errors: any = [];
 
