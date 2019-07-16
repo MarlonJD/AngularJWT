@@ -12,7 +12,7 @@ npm install -g @angular/cli
 ```
 npm install
 ```
-3) Option 1: Bui d the angular project.
+3) Option 1: Build the angular project.
 ```
 ng build
 ```
